@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>bespoke-theme-nebula</title>
+        <meta name="description" content="A theme for Bespoke.js">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta charset="utf-8">
+    </head>
+    <style>
+        html, body {
+            background: #f0f0f0;
+            color: #232323;
+            transition: all .9s ease-in;
+        }
+        body.hidden { 
+            opacity: 0;
+        }
+
+        .bg-abstract {
+            background-image: url('img/abstract.jpg');
+        }
+        .bg-map {
+            background-image: url('img/fantasymap.png');
+        }
+
+
+
+        .bespoke-parent {
+                background: #f0f0f0;
+                color: #232323;
+        }
+        
+    </style>
+    <body class='hidden'>
+        <article>
+
+            <!--  =======================
+                INTRO
+                ========================= -->
+            <!-- EMPTY?
+            <section>
+            </section>
+            -->
+
+            <section>
+                <h1 style='font-size:1.9em;'>
+                        Crafting Experiences
+                </h1>
+            </section>
+            <section> 
+                    <h3>&mdash;2014 Visualizations &mdash;</h3>
+            </section>
+
+
+            
+            <!--  =======================
+                Into - what is an experience
+                ========================= -->
+            <section>
+                <h1 class='bullet' style='font-size: 1.5em;'>
+                    Experience: Visualized
+                </h1>
+                <br />
+                <br />
+                <img class='bullet' src='img/interestcurve.jpg' />
+            </section>
+
+
+
+            <!--  =======================
+                Loading Indicators  
+                ========================= -->
+            <section>
+                <div id='spinner-indicator'></div>
+            </section>
+
+            <section data-bespoke-backdrop="bg-abstract">
+                <h2>Lie to Me</h2>
+            </section>
+
+            <section>
+                Some stuff about being right vs. being happy
+            </section>
+
+            <section>
+                Outline LOADING
+            </section>
+
+            <!--  =======================
+                act 2 - turning point
+                ========================= -->
+            <section>
+                <h1 style='text-shadow: 0 0 3px #f0f0f0;'>
+                    SVG Filters
+                </h1>
+                <h3>Chart Junk, <br />
+                    Data Art vs. Data Visualization, <br />
+                    and other ways to be "right"
+                </h3>
+            </section>
+
+            <section>
+                Data viz...tells stories. You tell stories to humans. Just as the most optimal code for a computer is not often the most readable code for humans, the most efficient visualization is not always the most effective one
+            </section>
+
+            <!-- EXAMPLES -->
+            <section>
+                <h2>
+                    #filter
+                </h2>
+            </section>
+
+            <!--  =======================
+                climax - putting it all together
+                ========================= -->
+            <section>
+                <h1>
+                    Let's Craft an Experience
+                </h1>
+            </section>
+            <section data-bespoke-backdrop="bg-map">
+                <h2 style='text-shadow: 0 0 3px #f0f0f0;'>
+                    I want to play a game 
+                </h2>
+            </section>
+
+            <!-- GAME STUFF -->
+
+
+
+
+            <!--  =======================
+                resolution
+                ========================= -->
+            <section>
+                <h1>Thank You</h1>
+                <br />
+                <br />
+                <br />
+                <h2>&mdash;<a href="http://vasir.net">Erik Hazzard</a>&mdash;</h2>
+                <h3>
+                    @enoex
+                    <br />
+                    http://vasir.net
+                </h3>
+            </section>
+            
+            <section>
+                <h2 class="single-words">Try the &lsquo;single-words&rsquo; class</h2>
+            </section>
+
+            <!-- BULLET to show things -->
+            <section>
+                <h2 class="bullet">Enjoy <span class='bullet'>:)</span></h2>
+            </section>
+        </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ==================================================
+
+            SCRIPTS
+
+            ================================================== -->
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/build.js"></script>
+        <script src="js/lib/spin.js"></script>
+        <script src="js/lib/d3.js" charset="utf-8"></script>
+
+
+
+
+        <!-- ==================================================
+            Custom
+            ================================================== -->
+        <script>
+            setTimeout(function(){
+                $('body').removeClass('hidden');
+            }, 200);
+
+            setTimeout(function(){
+                var opts = {
+                  lines: 13, // The number of lines to draw
+                  length: 20, // The length of each line
+                  width: 10, // The line thickness
+                  radius: 30, // The radius of the inner circle
+                  corners: 1, // Corner roundness (0..1)
+                  rotate: 0, // The rotation offset
+                  direction: 1, // 1: clockwise, -1: counterclockwise
+                  color: '#000', // #rgb or #rrggbb or array of colors
+                  speed: 1, // Rounds per second
+                  trail: 60, // Afterglow percentage
+                  shadow: false, // Whether to render a shadow
+                  hwaccel: false, // Whether to use hardware acceleration
+                  className: 'spinner', // The CSS class to assign to the spinner
+                  zIndex: 2e9, // The z-index (defaults to 2000000000)
+                  top: '50%', // Top position relative to parent
+                  left: '50%' // Left position relative to parent
+                };
+                var target = document.getElementById('spinner-indicator');
+                var spinner = new Spinner(opts).spin(target);
+            }, 500);
+        </script>
+    </body>
+</html>
