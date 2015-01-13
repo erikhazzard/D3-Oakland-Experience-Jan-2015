@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>bespoke-theme-nebula</title>
+        <title>Experience - Data Viz</title>
         <meta name="description" content="A theme for Bespoke.js">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta charset="utf-8">
@@ -47,8 +47,13 @@
                         Crafting Experiences
                 </h1>
             </section>
+
+
+            <!-- ========================
+                Story time
+                ========================= -->
             <section> 
-                    <h3>&mdash;2014 Visualizations &mdash;</h3>
+                    <h3>Story</h3>
             </section>
 
 
@@ -75,7 +80,7 @@
             </section>
 
             <section data-bespoke-backdrop="bg-abstract">
-                <h2>Lie to Me</h2>
+                <h2>"Lie" to Me</h2>
             </section>
 
             <section>
@@ -173,43 +178,16 @@
 
             ================================================== -->
         <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/d3.js" charset="utf-8"></script>
+        <script src="js/lib/lodash.js"></script>
         <script src="js/lib/build.js"></script>
         <script src="js/lib/spin.js"></script>
-        <script src="js/lib/d3.js" charset="utf-8"></script>
-
-
 
 
         <!-- ==================================================
             Custom
             ================================================== -->
-        <script>
-            setTimeout(function(){
-                $('body').removeClass('hidden');
-            }, 200);
-
-            setTimeout(function(){
-                var opts = {
-                  lines: 13, // The number of lines to draw
-                  length: 20, // The length of each line
-                  width: 10, // The line thickness
-                  radius: 30, // The radius of the inner circle
-                  corners: 1, // Corner roundness (0..1)
-                  rotate: 0, // The rotation offset
-                  direction: 1, // 1: clockwise, -1: counterclockwise
-                  color: '#000', // #rgb or #rrggbb or array of colors
-                  speed: 1, // Rounds per second
-                  trail: 60, // Afterglow percentage
-                  shadow: false, // Whether to render a shadow
-                  hwaccel: false, // Whether to use hardware acceleration
-                  className: 'spinner', // The CSS class to assign to the spinner
-                  zIndex: 2e9, // The z-index (defaults to 2000000000)
-                  top: '50%', // Top position relative to parent
-                  left: '50%' // Left position relative to parent
-                };
-                var target = document.getElementById('spinner-indicator');
-                var spinner = new Spinner(opts).spin(target);
-            }, 500);
-        </script>
+        <script src="js/slide-funcs.js"></script>
+        <script src="js/presentation.js"></script>
     </body>
 </html>

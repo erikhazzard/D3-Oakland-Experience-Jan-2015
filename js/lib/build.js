@@ -153,6 +153,8 @@ module.exports = function(options) {
       activateBullet(e.index, 0);
     });
 
+    window.DECK = deck;
+
     activateBullet(0, 0);
   };
 };
