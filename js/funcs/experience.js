@@ -5,7 +5,7 @@ var DURATION = 200;
 // setup the data
 var FINAL_DATA = [
     // start
-    0.1,
+    0.1, 0.1,
     0.5, // HOOK
     0.2, 0.26, 0.4, // Act 1 climax
     0.35, 0.3, // little break
@@ -24,7 +24,7 @@ var data = _.map(FINAL_DATA, function(d){ return FINAL_DATA[0]; });
 var n = 40;
 
 var margin = {
-    top: 20, right: 20, 
+    top: 60, right: 20, 
     bottom: 40, left: 40
 };
 var width = 960 - margin.left - margin.right;
@@ -61,13 +61,45 @@ chart.append('defs').append('clipPath')
     });
 
 // Axes
+// --------------------------------------
 var axesGroup = chart.append('g').attr({ 'class': 'axes', 'opacity': 0 });
 axesGroup.append('line')
     .attr({ 'class': 'x', x1: 0, x2: 0, y1: 0, y2: height });
 axesGroup.append('line')
     .attr({ 'class': 'y', x1: 0, x2: scaleX(FINAL_DATA.length-1), y1: height, y2: height});
 
+// HEADER
+axesGroup.append('text')
+    .attr({
+        'class': 'header-label-text',
+        transform: 'translate(' + [
+            width / 2 - 150, -20
+        ] + ')'
+    })
+    .text('Experience: Visualized');
+
+// Y Label
+axesGroup.append('text')
+    .attr({
+        'class': 'y-label-text',
+        transform: 'rotate(270 100 120)'
+    })
+    .text('Interest');
+
+// x label
+axesGroup.append('text')
+    .attr({
+        'class': 'x-label-text',
+        transform: 'translate(' + [
+            width / 2, 
+            height + 30
+        ] + ')'
+    })
+    .text('Time');
+
+
 // Draw the line
+// --------------------------------------
 var path = chart.append('g')
     .attr({
         'class': 'pathGroup',
@@ -117,9 +149,11 @@ var guide = chart.append('circle')
         r: 10
     });
 
-// --------------------------------------
+// ======================================
+//
 // Tick func
-// --------------------------------------
+//
+// ======================================
 var numTicks = 0;
 function tick() {
     // Check if done
@@ -128,6 +162,7 @@ function tick() {
         requestAnimationFrame(function(){ 
             var fadeInDuration = 2000;
 
+            // fade in those axes
             axesGroup.transition().duration(fadeInDuration)
                 .attr({ opacity: 1 });
 
