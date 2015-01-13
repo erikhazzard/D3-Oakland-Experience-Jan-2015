@@ -1,6 +1,6 @@
 window.APP = window.APP || {};
 
-var DURATION = 200;
+var DURATION = 2000;
 
 // setup the data
 var FINAL_DATA = [
@@ -24,19 +24,22 @@ var data = _.map(FINAL_DATA, function(d){ return FINAL_DATA[0]; });
 var n = 40;
 
 var margin = {
-    top: 60, right: 20, 
+    top: 60, right: 30, 
     bottom: 40, left: 40
 };
-var width = 960 - margin.left - margin.right;
+var width = 980 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
+// scales
 var scaleX = d3.scale.linear()
     .domain([1, FINAL_DATA.length - 2])
     .range([0, width]);
-
 var scaleY = d3.scale.linear()
     .domain([0, 1])
     .range([height, 0]);
+var scaleCircleRadius = d3.scale.linear()
+    .domain([0, 1])
+    .range([5, 26]);
 
 // The initial line should be linear, otherwise we get weird artifacts on the
 // guide circle
@@ -146,7 +149,7 @@ var guide = chart.append('circle')
         'class': 'guide',
         cx: width,
         cy: scaleY(FINAL_DATA[0]),
-        r: 10
+        r: scaleCircleRadius(FINAL_DATA[0])
     });
 
 // ======================================
@@ -200,7 +203,7 @@ function tick() {
 
     var duration = DURATION;
     // start immediately first time
-    if(numTicks === 0){ duration = 1; } 
+    if(numTicks < 3){ duration = 1; } 
 
     // redraw the line, and slide it to the left
     path
@@ -218,9 +221,11 @@ function tick() {
             .each("end", tick);
 
     // move the guide circle
+    var index = numTicks-1 >= 0 ? numTicks-1 : 0;
     guide.transition().duration(DURATION).ease('linear')
         .attr({
-            cy: scaleY(FINAL_DATA[numTicks-1 >= 0 ? numTicks-1 : 0])
+            cy: scaleY(FINAL_DATA[index]),
+            r: scaleCircleRadius(FINAL_DATA[index])
         });
 
     numTicks++;
