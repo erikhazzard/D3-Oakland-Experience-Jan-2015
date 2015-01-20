@@ -1,0 +1,82 @@
+html, body {
+    background: #f0f0f0;
+    color: #232323;
+    font-family: futura, helvetica, arial, arial, sans-serif;
+    transition: all .9s ease-in;
+}
+body.hidden { 
+    opacity: 0;
+}
+
+.bg-abstract {
+    background-image: url('../img/abstract.jpg');
+}
+.bg-map {
+    background-image: url('../img/fantasymap.png');
+}
+.bg-fantasy {
+    background-image: url('..//img/bg/fantasy.jpg');
+}
+.bg-embers-space {
+    background-image: url('..//img/bg/embers.jpg');
+}
+
+
+
+/* TILES _ Section BGs */
+.bg-tiles {
+    background-image: url('../img/bg/tiles.png'); 
+    opacity: 1;
+}
+.bg-tiles.bespoke-backdrop-inactive {
+    opacity: 0;
+}
+section[data-bespoke-backdrop*="bg-tiles"], 
+section[data-bespoke-backdrop*="bg-tiles"] h1,
+section[data-bespoke-backdrop*="bg-tiles"] h2,
+section[data-bespoke-backdrop*="bg-tiles"] h3,
+section[data-bespoke-backdrop*="bg-tiles"] h4,
+section[data-bespoke-backdrop*="bg-tiles"] h5 {
+    color: #ffffff !important;
+}
+
+.bespoke-parent {
+        background: #f0f0f0;
+        color: #232323;
+}
+        
+
+
+
+
+
+
+
+
+
+
+
+/* EXPERIENCE VIZ */
+.header-label-text { font-size: 2em; }
+.y-label-text, .x-label-text {
+    font-size: 1.5em;
+    font-style: italic;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.experience-line, line {
+  fill: none;
+  stroke: #343434;
+  stroke-width: 2px;
+}
+.experience-line { stroke-width: 4px; }
+.axes line { stroke: #343434; }
+.guide {
+    fill: #343434;
+    stroke: #f0f0f0;
+    stroke-width: 4px;
+}

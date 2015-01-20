@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<style>
+    html, body {
+        background: #ffffff;
+        font-family: Helvetica, Arial, Tahoma, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    path {
+        fill: none;
+        stroke: #343434;
+    }
+    .result {
+        fill: none;
+        stroke: #343434;
+        stroke-width: 4px;
+    }
+
+    h1,h2,h3 {
+        padding-left: 140px;
+        padding-top: 0px;
+    }
+</style>
+</head>
+<body>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink= 'http://www.w3.org/1999/xlink' 
+    height=600 width=900>
+    <defs>
+        <filter id="filter-map" x="-0.15000001" y="-0.15000001" width="1.3" height="1.3" color-interpolation-filters="sRGB" >
+            <feGaussianBlur stdDeviation="4" in="SourceGraphic" result="result1" id="feGaussianBlur4202" />
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="4" result="result0" id="feTurbulence4204" />
+            <feDisplacementMap in2="result0" scale="20" xChannelSelector="R" yChannelSelector="G" in="result1" result="result2" id="feDisplacementMap4206" />
+            <feGaussianBlur stdDeviation="3" in="SourceGraphic" result="result4" id="feGaussianBlur4208" />
+            <feComposite in2="result2" operator="arithmetic" k1="1.5" k2="-0.25" k3="0.5" k4="0" in="result4" result="result5" id="feComposite4210" />
+        </filter>
+    </defs>
+</svg>
+
+<!--
+<h3>Fog of War - Click to remove fog</h3>
+<em>Note: this is not designed to be performant; this is just an example of how filters and masks can be used</em>
+-->
+
+<script src="/js/lib/d3.js" charset="utf-8"></script>
+
+<script>
+
+(function setupMap(){
+    // 0. setup groups
+    // ----------------------------------
+    var svg = d3.select('svg');
+    var wrapper = svg.append('g').attr({ 'class': 'map-wrapper'});
+    var background = wrapper.append('g').attr({ 'class': 'background'});
+    var characters = wrapper.append('g').attr({ 'class': 'characters'});
+
+    // 1. Setup the mask
+    // ----------------------------------
+    var maskGroup = svg.select('defs').append('mask')
+        .attr({ id: 'map-mask' });
+
+    // 2. Add map images
+    // ----------------------------------
+    // fog version - grayscaled and dark
+    var fogMap = background.append("image")
+        .attr({ 
+            // TODO: use difference background image
+            'xlink:href': 'http://vasir-assets.s3.amazonaws.com/fog-of-war/map-dark.jpg',
+            'preserveAspectRatio': 'none',
+            'class': 'fog', x: 0, y: 0,
+            height: '100%', width: '100%'
+        });
+
+    // full version
+    var visibleMap = background.append("image")
+        .attr({ 
+            // TODO: use difference background image
+            'xlink:href': 'http://vasir-assets.s3.amazonaws.com/fog-of-war/map.jpg',
+            'preserveAspectRatio': 'none',
+            'class': 'visibleArea', x: 0, y: 0,
+            height: '100%', width: '100%'
+        })
+        .style({ 
+            // fill with full version of map
+            fill: '#336699', mask: 'url(#map-mask)'
+        });
+
+    // 3. Add a starting circle to break the fog
+    // ----------------------------------
+    // create a masked path to show visible nodes   
+    var vertices = [{ x: svg.attr('width')/2, y: svg.attr('height')/2 }];
+
+    function updateFog(){
+        var masks = maskGroup.selectAll('.breakFog')
+            .data(vertices);
+
+        var newMasks = masks.enter()
+            .append('circle')
+            .style({
+                fill: '#000000',
+                opacity: 1
+            });
+
+        // update existing masks
+        masks
+            .attr({
+                'class': 'breakFog',
+                cx: function(d){ return d.x; },
+                cy: function(d){ return d.y; },
+                filter: 'url(#filter-map)',
+                r: function(d){ 
+                    var r = 43;
+                    return r;
+                }
+            });
+            
+        var newStyle = { fill: '#ffffff', opacity: 1 };
+
+        masks.transition().style(newStyle);
+        masks.exit().remove();
+
+
+        // add sprites
+        // ------------------------------
+        var sprites = characters.selectAll('.character')
+            .data(vertices);
+
+        var races = ['darkelf.gif', 'human.gif', 'elf.gif', 'mimirian.gif'];
+
+        sprites.enter()
+            .append("image")
+                .attr({ 
+                    'class': 'character',
+                    'xlink:href': 'http://vasir-assets.s3.amazonaws.com/fog-of-war/' +
+                        races[vertices.length % races.length],
+                    'preserveAspectRatio': 'none',
+                    x: function(d){ return d.x - 53/2; },
+                    y: function(d){ return d.y - 53/2; },
+                    height: 53, width: 53
+                });
+
+    };
+
+    // Call it immediately 
+    updateFog();
+
+    // then, call whenever a point is added
+    wrapper.on('click', function(){
+        vertices.push({
+            x: d3.event.clientX,
+            y: d3.event.clientY
+        });
+        updateFog();
+    });
+
+})();
+
+</script>
+
+</body>
+</html>

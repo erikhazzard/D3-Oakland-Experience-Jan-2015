@@ -202,7 +202,7 @@ module.exports = function(options) {
 
     document.addEventListener('keydown', function(e) {
       if (e.which == 34 || // PAGE DOWN
-        e.which == 32 || // SPACE
+        //e.which == 32 || // SPACE
         (isHorizontal && e.which == 39) || // RIGHT
         (!isHorizontal && e.which == 40) // DOWN
       ) { deck.next(); }

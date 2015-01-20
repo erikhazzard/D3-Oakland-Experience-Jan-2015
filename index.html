@@ -4,159 +4,393 @@
         <title>Experience - Data Viz</title>
         <meta name="description" content="A theme for Bespoke.js">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
         <meta charset="utf-8">
+        <script src="js/lib/jquery.js"></script>
+        <link href='/css/style.css' rel='stylesheet' />
+        <style>
+            /*slide overrides*/
+            #experience-viz-section, .full-slide { zoom: 1 !important; height: auto; width: auto; margin-top: 0; top: 50px; left: 100px; margin-left: 0;}
+            #fog-of-war, #bar-blur {
+                top: 30px;
+                left: 240px;
+            }
+            #bar-blur {
+                top: 100px;
+                left: 440px;
+            }
+        </style>
+
     </head>
-    <style>
-        html, body {
-            background: #f0f0f0;
-            color: #232323;
-            transition: all .9s ease-in;
-        }
-        body.hidden { 
-            opacity: 0;
-        }
-
-        .bg-abstract {
-            background-image: url('img/abstract.jpg');
-        }
-        .bg-map {
-            background-image: url('img/fantasymap.png');
-        }
-
-
-
-        .bespoke-parent {
-                background: #f0f0f0;
-                color: #232323;
-        }
-        
-    </style>
     <body class='hidden'>
         <article>
 
             <!--  =======================
                 INTRO
                 ========================= -->
+
             <!-- EMPTY?
             <section>
             </section>
             -->
 
-            <section>
-                <h1 style='font-size:1.9em;'>
-                        Crafting Experiences
+            <!-- ========================
+
+                Intro
+
+                ========================= -->
+            <section data-bespoke-backdrop="bg-tiles">
+                <h1 style='font-size:1.9em; border-top: none; padding-bottom: 24px; margin-bottom: 24px; margin-top: -60px;'>
+                    Crafting Experiences 
                 </h1>
+                <h2>with Data Visualization</h2>
             </section>
 
 
             <!-- ========================
-                Story time
-                ========================= -->
-            <section> 
-                    <h3>Story</h3>
-            </section>
-
-
             
-            <!--  =======================
-                Into - what is an experience
+                Hook - Intro - Story time
+
                 ========================= -->
+            <section style='zoom: 1;' id='experience-viz-section'> 
+                <svg id='experience-viz'>
+                    <defs>
+                        <filter id="filter-wavy" color-interpolation-filters="sRGB">
+                            <feTurbulence result="turbulence-result" 
+                                baseFrequency="0.02" 
+                                type="turbulence" 
+                                seed="1337" 
+                                numOctaves="3" />
+
+                            <feDisplacementMap in2="turbulence-result" 
+                                scale="9.6" 
+                                xChannelSelector="R" yChannelSelector="G" 
+                                in="SourceGraphic" />    
+                        </filter>
+
+                        <linearGradient id="gradient-fade"
+                            x1="100%" y1="0%"
+                            x2="90%" y2="0%"
+                            spreadMethod="pad">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                                <stop offset="100%" stop-color="#000000" stop-opacity="1"/>
+                        </linearGradient>
+
+                        <mask id="fade-mask" x="0" y="0" width="200" height="100" >
+                            <rect x="0" y="0"  width="980" height="600"
+                            style="stroke:none; fill: url(#gradient-fade)"/>
+                        </mask>
+                    </defs>
+                </svg>
+            </section>
+
+
             <section>
-                <h1 class='bullet' style='font-size: 1.5em;'>
+                <h2 class='bullet' style='font-size: 1.5em;'>
                     Experience: Visualized
-                </h1>
+                </h2>
                 <br />
                 <br />
-                <img class='bullet' src='img/interestcurve.jpg' />
+                <img width="100%" height="100%" src='/img/interest-story.png' />
+            </section>
+
+            <section>
+                <h2 style='font-size: 1.5em;'>
+                    Books and Movies
+                </h2>
+                <br />
+                <br />
+                <img width="100%" height="100%" src='/img/interest-book.png' />
+            </section>
+            <section>
+                <h2 class='bullet' style='font-size: 1.5em;'>
+                    Physical Interest Curve
+                </h2>
+                <br />
+                <br />
+                <img width="100%" height="100%" src='/img/interest-physical.png' />
             </section>
 
 
 
             <!--  =======================
+
                 Loading Indicators  
+
                 ========================= -->
+            <section data-bespoke-backdrop="bg-tiles">
+                <h1> 
+                    How to Craft Experiences
+                </h1>
+            </section>
+
             <section>
                 <div id='spinner-indicator'></div>
             </section>
 
-            <section data-bespoke-backdrop="bg-abstract">
-                <h2>"Lie" to Me</h2>
+            <section> 
+                <h2>Misdirection</h2>
+                Loading bars do not have to visualize loading
             </section>
 
             <section>
-                Some stuff about being right vs. being happy
+                <h2>1. Adding Loading Bars</h2>
+                <h3>Outline.com</h3>
             </section>
 
             <section>
-                Outline LOADING
+                <h4 class="single-words">Demo</h4>
+            </section>
+            
+            <section>
+                <h2>2. Exploit Existing Loading Bars</h2>
+                <h3>labs.five.com</h3>
+            </section>
+
+            <section>
+                <h3>Five Labs Demo</h3>
+                <img id='fivelabsgif' src='/img/fivelabs-logged-out.png'  width="900px" height="500px" />
+                <script>
+                    $(document).ready(function () {
+                        $('#fivelabsgif').bind('click mousedown', function () {
+                            $("#fivelabsgif").attr('src', "/img/fivelabs.gif");
+                            setTimeout(function(){
+                                $("#fivelabsgif").attr('src', "/img/fivelabs-logged-in.png");
+                            }, 33780);
+                        });
+                    });
+                </script>
             </section>
 
             <!--  =======================
-                act 2 - turning point
+
+                act 2 - filters
+
                 ========================= -->
             <section>
                 <h1 style='text-shadow: 0 0 3px #f0f0f0;'>
                     SVG Filters
                 </h1>
-                <h3>Chart Junk, <br />
-                    Data Art vs. Data Visualization, <br />
-                    and other ways to be "right"
-                </h3>
+                <h3>Techniques for Crafting Experiences</h3>
             </section>
 
             <section>
-                Data viz...tells stories. You tell stories to humans. Just as the most optimal code for a computer is not often the most readable code for humans, the most efficient visualization is not always the most effective one
+                <h2>Right vs. Happy</h2>
             </section>
 
-            <!-- EXAMPLES -->
+            <section>
+                <quote>
+                    Chartjunk does not achieve the goals of its propagators. The overwhelming fact of data graphics is that they stand or fall on their content, gracefully displayed. 
+                </quote>
+                <br />
+                <em>-Edward Tufte</em>
+            </section>
+
+            <!-- I generally agree with this. However, I think this is more of a "right" attitude. If you can make a chart with no chart junk and it does just as good or better job, by all means do it. 3D charts obviously are terrible, but not all decorations are bad.i
+            
+            However, if we consider data visualizations stories, then decorations can add a lot to them. 
+            However, thinking that an experience's success is based on its content alone doesn't explain 
+            -->
+
+            <section>
+                The overwhelming fact of <em style='display:inline;'>books</em> is that they stand or fall on their content, gracefully <em style='display:inline;'>written</em>
+            </section>
+
+            <section>
+                <img src='/img/twilight.png' />
+                How do we explain this?
+                <br />
+                <br />
+                <img src='img/twilight-woman.png' />
+            </section>
+
             <section>
                 <h2>
                     #filter
                 </h2>
+
+                <em>Make your audience happy</em>
+            </section>
+
+            <section>
+                <h3>Lying with data is never ok</h3>
+                <img src='/img/fox-news-unemployment.jpg' />
+            </section>
+
+            <!-- EXAMPLES -->
+
+            <section>
+                <h3>Examples</h3>
+            </section>
+
+            <section>
+                <h3>Hand Drawn Charts</h3>
+                <br />
+                <img width="100%" height="100%" src='/img/interest-book.png' />
+            </section>
+
+            <section id='bar-blur' class='full-slide'>
+                <h3>Ambiguous Data</h3>
+                <iframe src="individual/bar-blur.html" 
+                    class="center" scrolling="no" 
+                    style="background-color: #cdcdcd;" seamless="seamless" frameborder="0" width="560" height="356"> 
+                </iframe>
+            </section>
+
+            <section>
+                <h3>Add some flavor</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="250" width="400"> <rect width="300" height="200" x="30" y="30" fill="#7A6A53"></rect> <circle cx="175" cy="135" r="50" fill="#99B2B7"></circle> </svg>
+            </section>
+
+            <section>
+                <h3>Filter</h3>
+                <svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink= 'http://www.w3.org/1999/xlink' height=250 width=400>
+                    <defs>
+                        <filter id="filter-map" x="-0.15000001" y="-0.15000001" width="1.3" height="1.3" color-interpolation-filters="sRGB" >
+                            <feGaussianBlur stdDeviation="4" in="SourceGraphic" result="result1" id="feGaussianBlur4202" />
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="4" result="result0" id="feTurbulence4204" />
+                            <feDisplacementMap in2="result0" scale="20" xChannelSelector="R" yChannelSelector="G" in="result1" result="result2" id="feDisplacementMap4206" />
+                            <feGaussianBlur stdDeviation="3" in="SourceGraphic" result="result4" id="feGaussianBlur4208" />
+                            <feComposite in2="result2" operator="arithmetic" k1="1.5" k2="-0.25" k3="0.5" k4="0" in="result4" result="result5" id="feComposite4210" />
+                        </filter>
+                    </defs>
+
+                    <rect width=300 height=200 x=30 y=30 fill="#7A6A53" filter="url(#filter-map)" /> 
+                    <circle cx=175 cy=135 r=50 fill="#99B2B7" filter="url(#filter-map)"/>
+                </svg>
+            </section>
+
+            <section id='fog-of-war' class='full-slide'>
+                <h3>Fog of War Effect With Filters</h3>
+                <iframe src="individual/fog.html" 
+                    class="center" scrolling="no" 
+                    style="background-color: #cdcdcd;" seamless="seamless" frameborder="0" width="960" height="556"> 
+                </iframe>
+            </section>
+
+            <section>
+                <h2 class='bullet'>Guild Wars Visualization</h2>
+                <div class='bullet'>
+                    <h3> Original Source </h3>
+                    <img src='/img/original-gw2-data.jpg' />
+                </div>
+            </section>
+
+            <section>
+                <img src='/img/guildwars2viz.png' width='100%' height='100%'/>
+            </section>
+
+            <section>
+                <h2>InkScape</h2>
             </section>
 
             <!--  =======================
-                climax - putting it all together
+
+                act 3 - games
+
                 ========================= -->
-            <section>
-                <h1>
-                    Let's Craft an Experience
+            <section data-bespoke-backdrop="bg-tiles">
+                <h1 style='font-size:1.9em;'>
+                    Games 
                 </h1>
             </section>
-            <section data-bespoke-backdrop="bg-map">
-                <h2 style='text-shadow: 0 0 3px #f0f0f0;'>
-                    I want to play a game 
-                </h2>
+
+            <section>
+                <h2>Design as a Search Problem</h2>
+                Look at games for inspiration
             </section>
 
-            <!-- GAME STUFF -->
+            <section> 
+                <h2>Data Viz Can Improve Game Experiences</h2>
+                <hr />
+                <h4>Status Visualizations</h4>
+                Diegetic vs. Non-Diegetic
+            </section>
 
+            <section> 
+                <h3>DeadSpace</h3>
+                <img src='/img/games/deadspace.jpg' />
+            </section>
+            <section> 
+                <h3>FarCry</h3>
+                <img src='/img/games/farcry2.jpg' />
+            </section>
+
+            <section> 
+                <h2>Data Viz can Help Improve Skill</h2>
+                <hr />
+
+                <h4>Training Visualizations</h4>
+                No learning = No Fun
+            </section>
+
+            <section>
+                <h3>Starcraft 2</h3>
+                <img src='/img/games/sc2-replay-ingame.jpg' width=800 height=600 />
+            </section>
+
+            <section>
+                <h3>Leauge of Legends</h3>
+                <img src='/img/games/lol-recap0.png' width=500 height=300 />
+                <img src='/img/games/lol-recap1.png' width=500 height=300 />
+            </section>
+
+            <!--  =======================
+
+                My Game
+
+                ========================= -->
+            <section data-bespoke-backdrop="bg-tiles">
+                <h1 style='font-size:1.9em;'>
+                    Data Viz-Driven Game Design
+                </h1>
+            </section>
+
+            <section>
+                <h2>Epitaph</h2>
+                <br />
+                <ul>
+                    <li>Powered by D3</li>
+                    <li>Immersive Status Visualizations</li>
+                    <li>Training Visualizations to Improve Skill</li>
+                </ul>
+            </section>
+
+
+            <section data-bespoke-backdrop="bg-map">
+                <h4 class="single-words">Game Demo</h4>
+            </section>
 
 
 
             <!--  =======================
-                resolution
+
+                End - Climax
+
                 ========================= -->
+            <section>
+                <h2>One More Thing</h2>
+            </section>
+
+            <section>
+                <img src='/img/yodawg1.png' />
+            </section>
+
+            <section>
+                <img src='/img/interest-meta.png' width='100%' height='100%'/>
+            </section>
+
             <section>
                 <h1>Thank You</h1>
                 <br />
                 <br />
                 <br />
-                <h2>&mdash;<a href="http://vasir.net">Erik Hazzard</a>&mdash;</h2>
+                <h2>&mdash;<a href="http://vasir.net" style='border:none;'>Erik Hazzard</a>&mdash;</h2>
                 <h3>
                     @enoex
                     <br />
                     http://vasir.net
                 </h3>
-            </section>
-            
-            <section>
-                <h2 class="single-words">Try the &lsquo;single-words&rsquo; class</h2>
-            </section>
-
-            <!-- BULLET to show things -->
-            <section>
-                <h2 class="bullet">Enjoy <span class='bullet'>:)</span></h2>
             </section>
         </article>
 
@@ -177,7 +411,6 @@
             SCRIPTS
 
             ================================================== -->
-        <script src="js/lib/jquery.js"></script>
         <script src="js/lib/d3.js" charset="utf-8"></script>
         <script src="js/lib/lodash.js"></script>
         <script src="js/lib/build.js"></script>
