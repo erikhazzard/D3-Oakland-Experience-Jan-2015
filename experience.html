@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Experience</title>
+    <meta name="description" content="A theme for Bespoke.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <link href='/css/style.css' rel='stylesheet' />
+    <style>
+        html, body {
+            background: #F0F0F0;
+            transition: none;
+        }
+    </style>
+</head>
+<body>
+    <svg id='experience-viz'>
+        <defs>
+            <filter id="filter-wavy" color-interpolation-filters="sRGB">
+                <feTurbulence result="turbulence-result" 
+                    baseFrequency="0.02" 
+                    type="turbulence" 
+                    seed="1337" 
+                    numOctaves="3" />
+
+                <feDisplacementMap in2="turbulence-result" 
+                    scale="9.6" 
+                    xChannelSelector="R" yChannelSelector="G" 
+                    in="SourceGraphic" />    
+            </filter>
+
+            <linearGradient id="gradient-fade"
+                x1="100%" y1="0%"
+                x2="90%" y2="0%"
+                spreadMethod="pad">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="#000000" stop-opacity="1"/>
+            </linearGradient>
+
+            <mask id="fade-mask" x="0" y="0" width="200" height="100" >
+                <rect x="0" y="0"  width="980" height="600"
+                style="stroke:none; fill: url(#gradient-fade)"/>
+            </mask>
+        </defs>
+    </svg>
+
+    <!-- ==================================================
+
+        SCRIPTS
+
+        ================================================== -->
+    <script src="/js/lib/jquery.js"></script>
+    <script src="/js/lib/d3.js" charset="utf-8"></script>
+    <script src="/js/lib/lodash.js"></script>
+
+    <!-- ==================================================
+        Custom
+        ================================================== -->
+    <script src="/js/slide-funcs.js"></script>
+    <script src="/js/testing/experience.js"></script>
+</body>
+</html>
