@@ -36,6 +36,27 @@
 
     // Setup individual slide events
     // --------------------------------------
+    var hammertime = new Hammer(document.body, {});
+    var lastTap = new Date();
+    hammertime.on('tap', function(ev) {
+        console.log('hammer:tap', ev);
+        if(ev.tapCount < 2){ return false; }
+
+
+        if(new Date() - lastTap < 1100){
+            console.log('hammer:tap - too fast!');
+            return false;
+        }
+        lastTap = new Date();
+
+        if(ev.tapCount > 4){
+            window.DECK.prev(); 
+        } else {
+            window.DECK.next(); 
+        }
+    });
+
+    
     function setupDeckEvents( deck ){
         deck.on('next', function(event) {
             // Get current slide

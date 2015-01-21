@@ -15,11 +15,13 @@
                 console.log('presentation:slideFuncs:1', 'cleanup');
                 $(document).off('keypress', finishTransition);
                 $(document).off('keypress', startTick);
+                    $(document).off('click', finishTransition);
+                    $(document).off('click', startTick);
             },
 
             func: function visualizeExperience(){
                 // Handle visualization
-                var DURATION = 15000;
+                var DURATION = 13700;
                 var margin = {
                     top: 60, right: 30, 
                     bottom: 70, left: 40
@@ -210,6 +212,7 @@
                     // presses enter or space
                     finalTransitionCalled = true;
                     $(document).off('keypress', finishTransition);
+                    $(document).off('click', finishTransition);
 
                     requestAnimationFrame(function(){ 
                         var fadeInDuration = 3000;
@@ -258,18 +261,22 @@
                 //
                 // ======================================
                 finishTransition = function finishTransition(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
                     if(tickStarted === true && finalTransitionCalled === false){
-                        if(e.which === 13 || e.which === 32) {
+                        if(e.which === 1 || e.which === 13 || e.which === 32) {
                             finalTransition();
                         }
                     }
                 };
                 $(document).on('keypress', finishTransition);
+                $(document).on('click', finishTransition);
 
                 var numTicks = 0;
                 function tick() {
                     tickStarted = true;
                     $(document).off('keypress', startTick);
+                    $(document).off('click', startTick);
 
                     // Check if done
                     if(numTicks >= FINAL_DATA.length || finalTransitionCalled === true){
@@ -313,13 +320,16 @@
 
                 // start off tick when enter button is pressed
                 startTick = function startTick(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
                     if(tickStarted === false){
-                        if(e.which === 13 || e.which === 32) {
+                        if(e.which === 1 || e.which === 13 || e.which === 32) {
                             tick();
                         }
                     }
                 };
                 $(document).on('keypress', startTick);
+                $(document).on('click', startTick);
             }
         }
     };
