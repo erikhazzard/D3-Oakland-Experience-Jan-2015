@@ -2,6 +2,8 @@
 
 Talk given at a D3 Oakland Meetup. These are the slides. A web version can be [accessed here](http://enoex.github.io/D3-Oakland-Experience-Jan-2015/).
 
+You can also [find the blog post for the talk here](http://vasir.net/blog/data-visualization/crafting-experiences-with-data-visualization)
+
 
 ## Filters
 
